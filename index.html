@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>before reading press start</title>
+    <title>Image and Audio Example</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevents scrollbars from appearing */
+            width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
         }
-        #videoPlayer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw; /* Viewport width */
-            height: 100vh; /* Viewport height */
-            object-fit: cover; /* Ensures the video covers the area */
-            display: none;
+        #image {
+            width: 80%;
+            height: auto;
+            max-height: 80%;
+            object-fit: contain;
+            border: 5px solid #ccc;
+            margin-bottom: 20px;
         }
-        #audioPlayer {
-            display: none;
-        }
-        #playButton, #nextButton {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            padding: 10px 20px;
+        #startButton, #nextButton {
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
         }
         #nextButton {
             display: none;
@@ -38,46 +40,27 @@
     </style>
 </head>
 <body>
-    <!-- Button to start video and audio -->
-    <button id="playButton">Click Here</button>
 
-    <!-- Video element -->
-    <video id="videoPlayer" autoplay muted>
-        <source src="Untitled video - Made with Clipchamp.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Audio element -->
-    <audio id="audioPlayer" autoplay>
-        <source src="hahahahaha.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <!-- Next button -->
-    <button id="nextButton" onclick="window.location.href='real message/index.html';">Next</button>
+    <img id="image" src="I hope this message finds you well. All these days, I’ve been working on this project—maybe it was my way of distracting myself, of keeping away from all the depressing thoughts. But the truth is,.jpg" alt="Image">
+    <audio id="audio" src="new voice.m4a"></audio>
+    <button id="startButton" onclick="startAudio()">click me before reading</button>
+    <button id="nextButton" onclick="goToNextPage()">Next</button>
 
     <script>
-        // Get elements
-        const playButton = document.getElementById('playButton');
-        const videoPlayer = document.getElementById('videoPlayer');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const nextButton = document.getElementById('nextButton');
+        function startAudio() {
+            document.getElementById('startButton').style.display = 'none';
+            const audioElement = document.getElementById('audio');
+            audioElement.play();
 
-        // When play button is clicked
-        playButton.addEventListener('click', function() {
-            playButton.style.display = 'none';
-            videoPlayer.style.display = 'block';
-            audioPlayer.style.display = 'block';
+            // Show the "Next" button after the audio has finished playing
+            audioElement.onended = function() {
+                document.getElementById('nextButton').style.display = 'block';
+            };
+        }
 
-            // Play video and audio
-            videoPlayer.play();
-            audioPlayer.play();
-
-            // Show the next button when video ends
-            videoPlayer.addEventListener('ended', function() {
-                nextButton.style.display = 'block';
-            });
-        });
+        function goToNextPage() {
+            window.location.href = 'unclickable/unclickable.html';
+        }
     </script>
-</body>
-</html>
+
+
